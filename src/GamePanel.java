@@ -45,6 +45,16 @@ public class GamePanel extends JPanel implements ActionListener{
         }
         g.setColor(Color.red);
         g.fillOval(appleX,appleY,unit_size,unit_size);
+        for(int i = 0; i< bodyparts;i++){
+            if(i==0){
+                g.setColor(Color.green);
+                g.fillRect(x[i],y[i],unit_size,unit_size);
+            }
+            else {
+                g.setColor(new Color(45,180,0));
+                g.fillRect(x[i],y[i],unit_size,unit_size);
+            }
+        }
 
     }
     public void newApple(){
@@ -53,7 +63,27 @@ public class GamePanel extends JPanel implements ActionListener{
 
     }
 
-    public void move(){
+    public void move() {
+        for (int i = bodyparts; i > 0; i--) {
+            x[i] = x[i - 1];
+            y[i] = y[i-1];
+        }
+        switch (direction){
+            case 'U':
+                y[0] = y[0] - unit_size;
+                break;
+            case 'D':
+                y[0] = y[0]+unit_size;
+                break;
+            case 'L':
+                x[0] = x[0] - unit_size;
+                break;
+            case 'R':
+                x[0] = x[0] + unit_size;
+                break;
+
+
+        }
 
     }
 
@@ -68,6 +98,12 @@ public class GamePanel extends JPanel implements ActionListener{
 
     }
     public void actionPerformed(ActionEvent e){
+        if(running){
+            move();
+            checkApple();
+            checkCollisions();
+        }
+        repaint();
 
     }
 
