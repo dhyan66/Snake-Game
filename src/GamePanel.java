@@ -122,9 +122,11 @@ public class GamePanel extends JPanel implements ActionListener{
     }
 
     public void gameOver(Graphics g){
-
-    }
-    public void actionPerformed(ActionEvent e){
+        // Game over text
+        g.setColor(Color.red);
+        g.setFont(new Font("Ink Free",Font.BOLD,75));
+        FontMetrics metrics = getFontMetrics(g.getFont());}
+ public void actionPerformed(ActionEvent e){
         if(running){
             move();
             checkApple();
